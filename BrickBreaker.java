@@ -177,3 +177,96 @@ String status;
 
  
  
+
+ @Override
+ public void keyPressed(KeyEvent e) {
+  int keyCode = e.getKeyCode();
+  if (keyCode == KeyEvent.VK_LEFT) {
+   left = true;
+   
+  }
+
+  if (keyCode == KeyEvent.VK_RIGHT) {
+   right = true;
+  
+  }
+ }
+
+ @Override
+ public void keyReleased(KeyEvent e) {
+  int keyCode = e.getKeyCode();
+  if (keyCode == KeyEvent.VK_LEFT) {
+   left = false;
+  }
+
+  if (keyCode == KeyEvent.VK_RIGHT) {
+   right = false;
+  }
+ }
+
+ @Override
+ public void keyTyped(KeyEvent arg0) {
+
+ }
+
+ @Override
+ public void actionPerformed(ActionEvent e) {
+  String str = e.getActionCommand();
+  if (str.equals("restart")) {
+   this.restart();
+
+  }
+ }
+
+ public void restart() {
+
+  requestFocus(true);
+  initializeVariables();
+  createBricks();
+  repaint();
+ }
+
+ public void initializeVariables(){
+     
+      ballx = 160;
+      bally = 218;
+      
+      batx = 160;
+      baty = 245;
+      
+      brickx = 70;
+      bricky = 50;
+     
+      Ball = new Rectangle(ballx, bally, 5, 5);
+      Bat = new Rectangle(batx, baty, 40, 5);
+      
+      Brick = new Rectangle[12];
+
+      movex = -1;
+      movey = -1;
+      ballFallDown = false;
+      bricksOver = false;
+      count = 0;
+      status = null;
+
+     
+ }
+ public void createBricks(){
+     
+      for (int i = 0; i < Brick.length; i++) {
+       Brick[i] = new Rectangle(brickx, bricky, brickBreadth, brickHeight);
+       if (i == 5) {
+        brickx = 70;
+        bricky = (bricky + brickHeight + 2);
+        
+       }
+       if (i == 9) {
+        brickx = 100;
+        bricky = (bricky + brickHeight + 2);
+       
+       }
+       brickx += (brickBreadth+1);
+      }
+ }
+
+}
